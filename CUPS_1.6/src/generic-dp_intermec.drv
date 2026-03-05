@@ -1,0 +1,601 @@
+// CUPS PPD Compiler CUPS v1.4.3
+
+// Include necessary files...
+#include <font.defs>
+#include <media.defs>
+
+// Intermec DP Printer
+Copyright ""
+Copyright "intermec-generic-dp.ppd"
+Copyright ""
+Copyright "Add description here.."
+Copyright "http://www.cups.org/documentation.php/postscript-driver.html"
+Copyright ""
+Manufacturer "Intermec"
+Version "1.2"
+DriverType ps
+ModelNumber 1
+Throughput 8
+
+// Printer attributes
+Attribute "Product" "" "(Generic Direct Protocol)"
+Attribute "PSVersion" "" "(3010.000) 550"
+Attribute "PSVersion" "" "(3010.000) 651"
+Attribute "PSVersion" "" "(3010.000) 652"
+Attribute "PSVersion" "" "(3010.000) 653"
+Attribute "PSVersion" "" "(3010.000) 704"
+Attribute "PSVersion" "" "(3010.000) 705"
+Attribute "PSVersion" "" "(3010.000) 707"
+Attribute "PSVersion" "" "(3010.000) 800"
+Attribute "LanguageLevel" "" "3"
+Attribute "DriverType" "" "custom"
+Attribute "DefaultColorSpace" "" "Gray"
+Attribute "FileSystem" "" "False"
+Attribute "LandscapeOrientation" "" "Plus90"
+Attribute "TTRasterizer" "" "Type42"
+Attribute "RequiresPageRegion" "All" "True"
+
+// Filters supported
+Filter "application/vnd.cups-pdf 0 /usr/bin/intermec-dp-drv"
+Filter "application/vnd.cups-postscript 100 /usr/bin/intermec-dp-drv"
+
+// Font list
+Font "AvantGarde-Book" "Standard" "(001.006S)" "Standard" ROM
+Font "AvantGarde-BookOblique" "Standard" "(001.006S)" "Standard" ROM
+Font "AvantGarde-Demi" "Standard" "(001.007S)" "Standard" ROM
+Font "AvantGarde-DemiOblique" "Standard" "(001.007S)" "Standard" ROM
+Font "Bookman-Demi" "Standard" "(001.004S)" "Standard" ROM
+Font "Bookman-DemiItalic" "Standard" "(001.004S)" "Standard" ROM
+Font "Bookman-Light" "Standard" "(001.004S)" "Standard" ROM
+Font "Bookman-LightItalic" "Standard" "(001.004S)" "Standard" ROM
+Font "Courier" "Standard" "(002.004S)" "Standard" ROM
+Font "Courier-Bold" "Standard" "(002.004S)" "Standard" ROM
+Font "Courier-BoldOblique" "Standard" "(002.004S)" "Standard" ROM
+Font "Courier-Oblique" "Standard" "(002.004S)" "Standard" ROM
+Font "Helvetica" "Standard" "(001.006S)" "Standard" ROM
+Font "Helvetica-Bold" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-BoldOblique" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-Narrow" "Standard" "(001.006S)" "Standard" ROM
+Font "Helvetica-Narrow-Bold" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-Narrow-BoldOblique" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-Narrow-Oblique" "Standard" "(001.006S)" "Standard" ROM
+Font "Helvetica-Oblique" "Standard" "(001.006S)" "Standard" ROM
+Font "NewCenturySchlbk-Bold" "Standard" "(001.009S)" "Standard" ROM
+Font "NewCenturySchlbk-BoldItalic" "Standard" "(001.007S)" "Standard" ROM
+Font "NewCenturySchlbk-Italic" "Standard" "(001.006S)" "Standard" ROM
+Font "NewCenturySchlbk-Roman" "Standard" "(001.007S)" "Standard" ROM
+Font "Palatino-Bold" "Standard" "(001.005S)" "Standard" ROM
+Font "Palatino-BoldItalic" "Standard" "(001.005S)" "Standard" ROM
+Font "Palatino-Italic" "Standard" "(001.005S)" "Standard" ROM
+Font "Palatino-Roman" "Standard" "(001.005S)" "Standard" ROM
+Font "Symbol" "Special" "(001.007S)" "Special" ROM
+Font "Times-Bold" "Standard" "(001.007S)" "Standard" ROM
+Font "Times-BoldItalic" "Standard" "(001.009S)" "Standard" ROM
+Font "Times-Italic" "Standard" "(001.007S)" "Standard" ROM
+Font "Times-Roman" "Standard" "(001.007S)" "Standard" ROM
+Font "ZapfChancery-MediumItalic" "Standard" "(001.007S)" "Standard" ROM
+Font "ZapfDingbats" "Special" "(001.004S)" "Standard" ROM
+
+// General settings
+Group "General/General"
+  Option "MediaType/Print Method" PickOne AnySetup 20.0
+    *Choice "Default/Use Printer Setting" ""
+    Choice "Thermal/Ribbon (TTR)" "<</MediaType(Thermal)>>setpagedevice"
+    Choice "Direct/No Ribbon (DT)" "<</MediaType(Direct)>>setpagedevice"
+
+// Media settings
+Group "MediaSettings/Media Settings"
+  Option "inMediaType/Media Type" PickOne AnySetup 20.0
+    *Choice "Default/Use Printer Setting" "<</cupsString0(Default)>>setpagedevice"
+    Choice "Gap/Media With Gaps" "<</cupsString0(Gap)>>setpagedevice"
+    Choice "Mark/Black Mark" "<</cupsString0(Mark)>>setpagedevice"
+    Choice "ContVar/Continuous Variable Length" "<</cupsString0(ContVar)>>setpagedevice"
+    Choice "ContFix/Continuous Fixed Length" "<</cupsString0(ContFix)>>setpagedevice"
+
+// Feed adjustment settings
+Group "FeedAdjustment/Feed Adjustment"
+  Option "inStartAdjust/Start Adjustment" PickOne AnySetup 20.0
+    *Choice "-1000/Use Printer Setting" "<</cupsRowStep -1000>>setpagedevice"
+    Choice "-120/-120 dots" "<</cupsRowStep -120>>setpagedevice"
+    Choice "-100/-100 dots" "<</cupsRowStep -100>>setpagedevice"
+    Choice "-80/-80 dots" "<</cupsRowStep -80>>setpagedevice"
+    Choice "-60/-60 dots" "<</cupsRowStep -60>>setpagedevice"
+    Choice "-40/-40 dots" "<</cupsRowStep -40>>setpagedevice"
+    Choice "-20/-20 dots" "<</cupsRowStep -20>>setpagedevice"
+    Choice "0/0 dots" "<</cupsRowStep 0>>setpagedevice"
+    Choice "20/20 dots" "<</cupsRowStep 20>>setpagedevice"
+    Choice "40/40 dots" "<</cupsRowStep 40>>setpagedevice"
+    Choice "60/60 dots" "<</cupsRowStep 60>>setpagedevice"
+    Choice "80/80 dots" "<</cupsRowStep 80>>setpagedevice"
+    Choice "100/100 dots" "<</cupsRowStep 100>>setpagedevice"
+    Choice "120/120 dots" "<</cupsRowStep 120>>setpagedevice"
+  Option "inStopAdjust/Stop Adjustment" PickOne AnySetup 20.0
+    *Choice "-1000/Use Printer Setting" "<</AdvanceDistance -1000>>setpagedevice"
+    Choice "-120/-120 dots" "<</AdvanceDistance -120>>setpagedevice"
+    Choice "-100/-100 dots" "<</AdvanceDistance -100>>setpagedevice"
+    Choice "-80/-80 dots" "<</AdvanceDistance -80>>setpagedevice"
+    Choice "-60/-60 dots" "<</AdvanceDistance -60>>setpagedevice"
+    Choice "-40/-40 dots" "<</AdvanceDistance -40>>setpagedevice"
+    Choice "-20/-20 dots" "<</AdvanceDistance -20>>setpagedevice"
+    Choice "0/0 dots" "<</AdvanceDistance 0>>setpagedevice"
+    Choice "20/20 dots" "<</AdvanceDistance 20>>setpagedevice"
+    Choice "40/40 dots" "<</AdvanceDistance 40>>setpagedevice"
+    Choice "60/60 dots" "<</AdvanceDistance 60>>setpagedevice"
+    Choice "80/80 dots" "<</AdvanceDistance 80>>setpagedevice"
+    Choice "100/100 dots" "<</AdvanceDistance 100>>setpagedevice"
+    Choice "120/120 dots" "<</AdvanceDistance 120>>setpagedevice"
+
+// Print quality settings
+Group "PrintQuality/Print Quality"
+  Option "inResolution/TPH Resolution" PickOne AnySetup 20.0
+    *Choice "203dpi/203 dpi" "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+    Choice "300dpi/300 dpi" "<</HWResolution[300 300]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+    Choice "406dpi/406 dpi" "<</HWResolution[406 406]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+  Option "inPrintSpeed/Print Speed" PickOne AnySetup 20.0
+    *Choice "Default/Use Printer Setting" ""
+    Choice "2/2 (inches/sec) " "<</cupsString1(2)>>setpagedevice"
+    Choice "3/3 (inches/sec)" "<</cupsString1(3)>>setpagedevice"
+    Choice "4/4 (inches/sec)" "<</cupsString1(4)>>setpagedevice"
+    Choice "5/5 (inches/sec)" "<</cupsString1(5)>>setpagedevice"
+    Choice "6/6 (inches/sec)" "<</cupsString1(6)>>setpagedevice"
+    Choice "7/7 (inches/sec)" "<</cupsString1(7)>>setpagedevice"
+    Choice "8/8 (inches/sec)" "<</cupsString1(8)>>setpagedevice"
+    Choice "9/9 (inches/sec)" "<</cupsString1(9)>>setpagedevice"
+    Choice "10/10 (inches/sec)" "<</cupsString1(10)>>setpagedevice"
+    Choice "11/11 (inches/sec)" "<</cupsString1(11)>>setpagedevice"
+    Choice "12/12 (inches/sec)" "<</cupsString1(12)>>setpagedevice"
+  Option "inDithering/Dithering Threshold" PickOne AnySetup 20.0
+    Choice "1/0.1 (lighter)" "<</cupsString2(1)>>setpagedevice"
+    Choice "2/0.2" "<</cupsString2(2)>>setpagedevice"
+    Choice "3/0.3" "<</cupsString2(3)>>setpagedevice"
+    Choice "4/0.4" "<</cupsString2(4)>>setpagedevice"
+    *Choice "5/0.5" "<</cupsString2(5)>>setpagedevice"
+    Choice "6/0.6" "<</cupsString2(6)>>setpagedevice"
+    Choice "7/0.7" "<</cupsString2(7)>>setpagedevice"
+    Choice "8/0.8" "<</cupsString2(8)>>setpagedevice"
+    Choice "9/0.9 (darker)" "<</cupsString2(9)>>setpagedevice"
+  Option "inColormode/Color Mode" PickOne AnySetup 20.0
+    *Choice "bw/Black/White" "<</cupsString4(8)>>setpagedevice"
+    Choice "gray/Gray" "<</cupsString4(9)>>setpagedevice"
+  Option "inSensitivity/Media Sensitivity" PickOne AnySetup 20.0
+    *Choice "-1/Use Printer Setting" ""
+    Choice "VeryLow/Very Low" "<</cupsString3(VeryLow)>>setpagedevice"
+    Choice "Low/Low" "<</cupsString3(Low)>>setpagedevice"
+    Choice "Medium/Medium" "<</cupsString3(Medium)>>setpagedevice"
+    Choice "High/High" "<</cupsString3(High)>>setpagedevice"
+    Choice "VeryHigh/Very High" "<</cupsString3(VeryHigh)>>setpagedevice"
+  Option "inDarkness/Darkness" PickOne AnySetup 20.0
+    *Choice "-1/Use Printer Setting" "<</cupsCompression -1>>setpagedevice"
+    Choice "5/5" "<</cupsCompression 5>>setpagedevice"
+    Choice "15/15" "<</cupsCompression 15>>setpagedevice"
+    Choice "25/25" "<</cupsCompression 25>>setpagedevice"
+    Choice "35/35" "<</cupsCompression 35>>setpagedevice"
+    Choice "45/45" "<</cupsCompression 45>>setpagedevice"
+    Choice "55/55" "<</cupsCompression 55>>setpagedevice"
+    Choice "65/65" "<</cupsCompression 65>>setpagedevice"
+    Choice "75/75" "<</cupsCompression 75>>setpagedevice"
+    Choice "85/85" "<</cupsCompression 85>>setpagedevice"
+    Choice "95/95" "<</cupsCompression 95>>setpagedevice"
+
+// Custom media definition - 1 inch wide
+CustomMedia "in.1x1/1.00x1.00\"" 72.00 72.00 0.00 0.00 0.00 0.00 "<</PageSize[72 72]/ImagingBBox null>>setpagedevice" "<</PageSize[72 72]/ImagingBBox null>>setpagedevice"
+
+// Custom media definition - 2 inch wide
+CustomMedia "in.2x1/2.00x1.00\"" 144.00 72.00 0.00 0.00 0.00 0.00 "<</PageSize[144 72]/ImagingBBox null>>setpagedevice" "<</PageSize[144 72]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.2x2/2.00x2.00\"" 144.00 144.00 0.00 0.00 0.00 0.00 "<</PageSize[144 144]/ImagingBBox null>>setpagedevice" "<</PageSize[144 144]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.2x3/2.00x3.00\"" 144.00 216.00 0.00 0.00 0.00 0.00 "<</PageSize[144 216]/ImagingBBox null>>setpagedevice" "<</PageSize[144 216]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.2x4/2.00x4.00\"" 144.00 288.00 0.00 0.00 0.00 0.00 "<</PageSize[144 288]/ImagingBBox null>>setpagedevice" "<</PageSize[144 288]/ImagingBBox null>>setpagedevice"
+
+// Custom media definition - 4 inch wide
+CustomMedia "in.4x1/4.00x1.00\"" 288.00 72.00 0.00 0.00 0.00 0.00 "<</PageSize[288 72]/ImagingBBox null>>setpagedevice" "<</PageSize[288 72]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x2/4.00x2.00\"" 288.00 144.00 0.00 0.00 0.00 0.00 "<</PageSize[288 144]/ImagingBBox null>>setpagedevice" "<</PageSize[288 144]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x3/4.00x3.00\"" 288.00 216.00 0.00 0.00 0.00 0.00 "<</PageSize[288 216]/ImagingBBox null>>setpagedevice" "<</PageSize[288 216]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x4/4.00x4.00\"" 288.00 288.00 0.00 0.00 0.00 0.00 "<</PageSize[288 288]/ImagingBBox null>>setpagedevice" "<</PageSize[288 288]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x5/4.00x5.00\"" 288.00 360.00 0.00 0.00 0.00 0.00 "<</PageSize[288 360]/ImagingBBox null>>setpagedevice" "<</PageSize[288 360]/ImagingBBox null>>setpagedevice"
+*CustomMedia "in.4x6/4.00x6.00\"" 288.00 432.00 0.00 0.00 0.00 0.00 "<</PageSize[288 432]/ImagingBBox null>>setpagedevice" "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x7/4.00x7.00\"" 288.00 504.00 0.00 0.00 0.00 0.00 "<</PageSize[288 504]/ImagingBBox null>>setpagedevice" "<</PageSize[288 504]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x8/4.00x8.00\"" 288.00 576.00 0.00 0.00 0.00 0.00 "<</PageSize[288 576]/ImagingBBox null>>setpagedevice" "<</PageSize[288 576]/ImagingBBox null>>setpagedevice"
+
+// Custom media definition - 6 inch wide
+CustomMedia "in.6x4/6.00x4.00\"" 432.00 288.00 0.00 0.00 0.00 0.00 "<</PageSize[432 288]/ImagingBBox null>>setpagedevice" "<</PageSize[432 288]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.6x6/6.00x6.00\"" 432.00 432.00 0.00 0.00 0.00 0.00 "<</PageSize[432 432]/ImagingBBox null>>setpagedevice" "<</PageSize[432 432]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.6x8/6.00x8.00\"" 432.00 576.00 0.00 0.00 0.00 0.00 "<</PageSize[432 576]/ImagingBBox null>>setpagedevice" "<</PageSize[432 576]/ImagingBBox null>>setpagedevice"
+
+// General media definitions
+VariablePaperSize Yes
+MinSize 36.00 36.00
+MaxSize 576.00 3600.00
+
+/////////////////////////////////////////////////////
+// Printer specific model names and device strings //
+/////////////////////////////////////////////////////
+
+//Generic DP Printer
+{
+  ModelName "Generic Direct Protocol"
+  PCFileName "intermec-dp.ppd"
+
+  Attribute "NickName" "" "Intermec Generic Direct Protocol"
+  Attribute "ShortNickName" "" "Generic Direct Protocol"
+}
+// End of Generic DP Printer
+
+
+// Mid Range Printers
+{
+  ModelName "PM23c-DP"
+  PCFileName "intermec-dp-pm23c-203.ppd"
+
+  Attribute "NickName" "" "Intermec PM23c (203dpi)"
+  Attribute "ShortNickName" "" "PM23c (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM23c-203-FP;"
+}
+
+{
+  ModelName "PM23c-DP"
+  PCFileName "intermec-dp-pm23c-300.ppd"
+
+  Attribute "NickName" "" "Intermec PM23c (300dpi)"
+  Attribute "ShortNickName" "" "PM23c (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM23c-300-FP;"
+}
+
+{
+  ModelName "PM23c-DP"
+  PCFileName "intermec-dp-pm23c-406.ppd"
+
+  Attribute "NickName" "" "Intermec PM23c (406dpi)"
+  Attribute "ShortNickName" "" "PM23c (406dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM23c-406-FP;"
+}
+
+{
+  ModelName "PM43-DP"
+  PCFileName "intermec-dp-pm43-203.ppd"
+
+  Attribute "NickName" "" "Intermec PM43 (203dpi)"
+  Attribute "ShortNickName" "" "PM43 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM43-203-FP;"
+}
+
+{
+  ModelName "PM43-DP"
+  PCFileName "intermec-dp-pm43-300.ppd"
+
+  Attribute "NickName" "" "Intermec PM43 (300dpi)"
+  Attribute "ShortNickName" "" "PM43 (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM43-300-FP;"
+}
+
+{
+  ModelName "PM43-DP"
+  PCFileName "intermec-dp-pm43-406.ppd"
+
+  Attribute "NickName" "" "Intermec PM43 (406dpi)"
+  Attribute "ShortNickName" "" "PM43 (406dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM43-406-FP;"
+}
+
+{
+  ModelName "PM43c-DP"
+  PCFileName "intermec-dp-pm43c-203.ppd"
+
+  Attribute "NickName" "" "Intermec PM43c (203dpi)"
+  Attribute "ShortNickName" "" "PM43c (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM43c-203-FP;"
+}
+
+{
+  ModelName "PM43c-DP"
+  PCFileName "intermec-dp-pm43c-300.ppd"
+
+  Attribute "NickName" "" "Intermec PM43c (300dpi)"
+  Attribute "ShortNickName" "" "PM43c (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM43c-300-FP;"
+}
+
+{
+  ModelName "PM43c-DP"
+  PCFileName "intermec-dp-pm43c-406.ppd"
+
+  Attribute "NickName" "" "Intermec PM43c (406dpi)"
+  Attribute "ShortNickName" "" "PM43c (406dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PM43c-406-FP;"
+}
+// End of Mid Range Printers
+
+
+// Commercial Printers
+{
+  ModelName "PD43-DP"
+  PCFileName "intermec-dp-pd43-203.ppd"
+
+  Attribute "NickName" "" "Intermec PD43 (203dpi)"
+  Attribute "ShortNickName" "" "PD43 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PD43-203-FP;"
+}
+
+{
+  ModelName "PD43-DP"
+  PCFileName "intermec-dp-pd43-300.ppd"
+
+  Attribute "NickName" "" "Intermec PD43 (300dpi)"
+  Attribute "ShortNickName" "" "PD43 (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PD43-300-FP;"
+}
+
+{
+  ModelName "PD43c-DP"
+  PCFileName "intermec-dp-pd43c-203.ppd"
+
+  Attribute "NickName" "" "Intermec PD43c (203dpi)"
+  Attribute "ShortNickName" "" "PD43c (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PD43c-203-FP;"
+}
+
+{
+  ModelName "PD43c-DP"
+  PCFileName "intermec-dp-pd43c-300.ppd"
+
+  Attribute "NickName" "" "Intermec PD43c (300dpi)"
+  Attribute "ShortNickName" "" "PD43c (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PD43c-300-FP;"
+}
+// End of Commercial Printers
+
+// Desktop Printers
+{
+  ModelName "PC43d-DP"
+  PCFileName "intermec-dp-pc43d-203.ppd"
+
+  Attribute "NickName" "" "Intermec PC43d (203dpi)"
+  Attribute "ShortNickName" "" "PC43d (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PC43d-203-FP;"
+}
+
+{
+  ModelName "PC43d-DP"
+  PCFileName "intermec-dp-pc43d-300.ppd"
+
+  Attribute "NickName" "" "Intermec PC43d (300dpi)"
+  Attribute "ShortNickName" "" "PC43d (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PC43d-300-FP;"
+}
+
+{
+  ModelName "PC43t-DP"
+  PCFileName "intermec-dp-pc43t-203.ppd"
+
+  Attribute "NickName" "" "Intermec PC43t (203dpi)"
+  Attribute "ShortNickName" "" "PC43t (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PC43t-203-FP;"
+}
+
+{
+  ModelName "PC43t-DP"
+  PCFileName "intermec-dp-pc43t-300.ppd"
+
+  Attribute "NickName" "" "Intermec PC43t (300dpi)"
+  Attribute "ShortNickName" "" "PC43t (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PC43t-300-FP;"
+}
+
+{
+  ModelName "PC23d-DP"
+  PCFileName "intermec-dp-pc23d-203.ppd"
+
+  Attribute "NickName" "" "Intermec PC23d (203dpi)"
+  Attribute "ShortNickName" "" "PC23d (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PC23d-203-FP;"
+}
+
+{
+  ModelName "PC23d-DP"
+  PCFileName "intermec-dp-pc23d-300.ppd"
+
+  Attribute "NickName" "" "Intermec PC23d (300dpi)"
+  Attribute "ShortNickName" "" "PC23d (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec ;MDL:PC23d-300-FP;"
+}
+// End of Desktop Printers
+
+
+// Old Mid Range Printers
+{
+  ModelName "PM4i-DP"
+  PCFileName "intermec-dp-pm4i-203.ppd"
+
+  Attribute "NickName" "" "Intermec PM4i (203dpi)"
+  Attribute "ShortNickName" "" "PM4i (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PM4i(203)FP;"
+}
+
+{
+  ModelName "PM4i-DP"
+  PCFileName "intermec-dp-pm4i-300.ppd"
+
+  Attribute "NickName" "" "Intermec PM4i (300dpi)"
+  Attribute "ShortNickName" "" "PM4i (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PM4i(300)FP;"
+}
+
+{
+  ModelName "PM4i-DP"
+  PCFileName "intermec-dp-pm4i-406.ppd"
+
+  Attribute "NickName" "" "Intermec PM4i (406dpi)"
+  Attribute "ShortNickName" "" "PM4i (406dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PM4i(406)FP;"
+}
+
+{
+  ModelName "PF4i-DP"
+  PCFileName "intermec-dp-pf4i-203.ppd"
+
+  Attribute "NickName" "" "Intermec PF4i (203dpi)"
+  Attribute "ShortNickName" "" "PF4i (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PF4i(203)FP;"
+}
+
+{
+  ModelName "PF4i-DP"
+  PCFileName "intermec-dp-pf4i-300.ppd"
+
+  Attribute "NickName" "" "Intermec PF4i (300dpi)"
+  Attribute "ShortNickName" "" "PF4i (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PF4i(300)FP;"
+}
+
+{
+  ModelName "PF2i-DP"
+  PCFileName "intermec-dp-pf2i-203.ppd"
+
+  Attribute "NickName" "" "Intermec PF2i (203dpi)"
+  Attribute "ShortNickName" "" "PF2i (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PF2i(203)FP;"
+}
+
+{
+  ModelName "PF2i-DP"
+  PCFileName "intermec-dp-pf2i-300.ppd"
+
+  Attribute "NickName" "" "Intermec PF2i (300dpi)"
+  Attribute "ShortNickName" "" "PF2i (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PF2i(300)FP;"
+}
+// End of Old Mid Range Printers
+
+
+// High Performance Printers
+{
+  ModelName "PX4i-DP"
+  PCFileName "intermec-dp-px4i-203.ppd"
+
+  Attribute "NickName" "" "Intermec PX4i (203dpi)"
+  Attribute "ShortNickName" "" "PX4i (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PX4i(203)FP;"
+}
+
+{
+  ModelName "PX4i-DP"
+  PCFileName "intermec-dp-px4i-300.ppd"
+
+  Attribute "NickName" "" "Intermec PX4i (300dpi)"
+  Attribute "ShortNickName" "" "PX4i (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PX4i(300)FP;"
+}
+
+{
+  ModelName "PX4i-DP"
+  PCFileName "intermec-dp-px4i-406.ppd"
+
+  Attribute "NickName" "" "Intermec PX4i (406dpi)"
+  Attribute "ShortNickName" "" "PX4i (406dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PX4i(406)FP;"
+}
+
+{
+  ModelName "PX6i-DP"
+  PCFileName "intermec-dp-px6i-203.ppd"
+
+  Attribute "NickName" "" "Intermec PX6i (203dpi)"
+  Attribute "ShortNickName" "" "PX6i (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PX6i(203)FP;"
+}
+
+{
+  ModelName "PX6i-DP"
+  PCFileName "intermec-dp-px6i-300.ppd"
+
+  Attribute "NickName" "" "Intermec PX6i (300dpi)"
+  Attribute "ShortNickName" "" "PX6i (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PX6i(300)FP;"
+}
+// End of High Performance Printers
+
+
+// Old Commercial Printers
+{
+  ModelName "PD41-DP"
+  PCFileName "intermec-dp-pd41-203.ppd"
+
+  Attribute "NickName" "" "Intermec PD41 (203dpi)"
+  Attribute "ShortNickName" "" "PD41 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PD41(203)FP;"
+}
+
+{
+  ModelName "PD41-DP"
+  PCFileName "intermec-dp-pd41-300.ppd"
+
+  Attribute "NickName" "" "Intermec PD41 (300dpi)"
+  Attribute "ShortNickName" "" "PD41 (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PD41(300)FP;"
+}
+
+{
+  ModelName "PD42-DP"
+  PCFileName "intermec-dp-pd42-203.ppd"
+
+  Attribute "NickName" "" "Intermec PD42 (203dpi)"
+  Attribute "ShortNickName" "" "PD42 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PD42(203)FP;"
+}
+
+{
+  ModelName "PD42-DP"
+  PCFileName "intermec-dp-pd42-300.ppd"
+
+  Attribute "NickName" "" "Intermec PD42 (300dpi)"
+  Attribute "ShortNickName" "" "PD42 (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PD42(300)FP;"
+}
+// End of Old Commercial Printers
+
+
+// Mobile Printers
+{
+  ModelName "PB21-DP"
+  PCFileName "intermec-dp-pb21-203.ppd"
+
+  Attribute "NickName" "" "Intermec PB21 (203dpi)"
+  Attribute "ShortNickName" "" "PB21 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PB21(203)FP;"
+}
+
+{
+  ModelName "PB22-DP"
+  PCFileName "intermec-dp-pb22-203.ppd"
+
+  Attribute "NickName" "" "Intermec PB22 (203dpi)"
+  Attribute "ShortNickName" "" "PB22 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PB22(203)FP;"
+}
+
+{
+  ModelName "PB31-DP"
+  PCFileName "intermec-dp-pb31-203.ppd"
+
+  Attribute "NickName" "" "Intermec PB31 (203dpi)"
+  Attribute "ShortNickName" "" "PB31 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PB31(203)FP;"
+}
+
+{
+  ModelName "PB32-DP"
+  PCFileName "intermec-dp-pb32-203.ppd"
+
+  Attribute "NickName" "" "Intermec PB32 (203dpi)"
+  Attribute "ShortNickName" "" "PB32 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PB32(203)FP;"
+}
+
+{
+  ModelName "PB50-DP"
+  PCFileName "intermec-dp-pb50-203.ppd"
+
+  Attribute "NickName" "" "Intermec PB50 (203dpi)"
+  Attribute "ShortNickName" "" "PB50 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:Intermec;MDL:PB50(203)FP;"
+}
+// End of Mobile Printers

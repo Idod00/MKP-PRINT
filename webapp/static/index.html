@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MKP Panel Operativo</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-glow"></div>
+    <header class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Centro de impresión MKP</p>
+        <h1>Panel Operativo</h1>
+        <p class="subhead">
+          Monitorea servicios, revisa las colas CUPS, clona impresoras y consulta los logs en tiempo real con una sola vista.
+        </p>
+        <div class="hero-actions">
+          <button id="refresh-all" class="btn primary">Actualizar todo</button>
+          <button id="refresh-logs" class="btn ghost">Solo logs</button>
+          <button id="logout-btn" class="btn ghost">Salir</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="pulse"></div>
+        <div class="icon-stack">
+          <span class="icon-card">🖨️</span>
+          <span class="icon-card">📄</span>
+          <span class="icon-card">⚙️</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+        <section class="view active" data-view="dashboard">
+          <section class="metrics" id="metrics">
+            <article class="metric-card">
+              <div class="metric-icon gradient-blue"></div>
+              <div>
+              <p class="metric-label">Servicios activos</p>
+              <p class="metric-value" data-metric="services">-</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon gradient-green"></div>
+            <div>
+              <p class="metric-label">Impresoras</p>
+              <p class="metric-value" data-metric="printers">-</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon gradient-amber"></div>
+            <div>
+              <p class="metric-label">Errores</p>
+              <p class="metric-value" data-metric="errors">0</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel-card" id="stats-panel">
+          <div class="section-head">
+            <div>
+              <h2>Estadísticas semanales</h2>
+              <p>Envíos diarios y tiempos de impresión (lunes a domingo)</p>
+            </div>
+            <button id="refresh-stats" class="btn secondary">Actualizar estadísticas</button>
+          </div>
+          <div class="stats-meta">
+            <span id="stats-week-range">Semana actual</span>
+            <span class="dot"></span>
+            <span id="stats-updated">Actualizado -</span>
+            <span class="dot"></span>
+            <span id="stats-totals">Total: 0 enviadas / 0 completadas</span>
+          </div>
+          <div class="origin-wrapper">
+            <div class="origin-head">
+              <p>Totales por origen</p>
+              <span>Enviadas / Completadas</span>
+            </div>
+            <div id="origin-summary" class="origin-chip-row"></div>
+          </div>
+          <div id="stats-error" class="alert" hidden></div>
+          <div class="stats-chart-card">
+            <canvas id="stats-chart" height="220" aria-label="Evolución semanal de impresiones"></canvas>
+          </div>
+          <div id="print-stats" class="stats-grid"></div>
+        </section>
+
+        <section class="panel-card nav-panel">
+          <div class="section-head">
+            <div>
+              <h2>Ir a otra sección</h2>
+              <p>Accesos directos al estado de servicios, logs y configuración.</p>
+            </div>
+          </div>
+          <div class="nav-grid">
+            <button class="nav-card" data-nav-target="services">
+              <span class="nav-icon">🛠️</span>
+              <div>
+                <p>Estados de servicios</p>
+                <small>Listener, CUPS y colas LPSTAT</small>
+              </div>
+            </button>
+            <button class="nav-card" data-nav-target="logs">
+              <span class="nav-icon">📜</span>
+              <div>
+                <p>Logs</p>
+                <small>Consultas rápidas al listener</small>
+              </div>
+            </button>
+            <button class="nav-card" data-nav-target="config">
+              <span class="nav-icon">⚙️</span>
+              <div>
+                <p>Configuraciones</p>
+                <small>Clonar impresoras y reiniciar servicios</small>
+              </div>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="view" data-view="services">
+        <div class="view-header">
+          <button class="btn ghost nav-back" data-nav-target="dashboard">← Dashboard</button>
+          <div>
+            <p class="eyebrow">Monitoreo</p>
+            <h2>Estados de servicios y colas</h2>
+          </div>
+          <div class="view-actions">
+            <button id="refresh-services" class="btn secondary">Actualizar servicios</button>
+            <button id="refresh-printers" class="btn secondary">Actualizar colas</button>
+          </div>
+        </div>
+
+        <section class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Servicios críticos</h2>
+              <p>print-listener.service y cups.service</p>
+            </div>
+          </div>
+          <div id="service-status" class="card-grid"></div>
+        </section>
+
+        <section class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Colas CUPS</h2>
+              <p>Estado y detalles reportados por lpstat</p>
+            </div>
+          </div>
+          <div id="printer-error" class="alert" hidden></div>
+          <div id="printers" class="card-grid"></div>
+        </section>
+      </section>
+
+      <section class="view" data-view="logs">
+        <div class="view-header">
+          <button class="btn ghost nav-back" data-nav-target="dashboard">← Dashboard</button>
+          <div>
+            <p class="eyebrow">Observabilidad</p>
+            <h2>Logs del listener</h2>
+          </div>
+          <div class="view-actions">
+            <button id="refresh-logs-page" class="btn secondary">Actualizar logs</button>
+          </div>
+        </div>
+
+        <section class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Archivo actual</h2>
+              <p>Últimas líneas del log rotado</p>
+            </div>
+          </div>
+          <div class="log-card">
+            <div class="log-meta">
+              <span id="log-file">Archivo: -</span>
+              <span class="dot"></span>
+              <span id="log-updated">Actualizado ahora</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-card split log-panel">
+          <div>
+            <div class="section-head">
+              <div>
+                <h3>Impresiones exitosas</h3>
+                <p>Entradas que indican trabajos completados</p>
+              </div>
+            </div>
+            <div class="log-card">
+              <pre id="log-success" class="log"></pre>
+            </div>
+          </div>
+          <div>
+            <div class="section-head">
+              <div>
+                <h3>Errores y alertas</h3>
+                <p>Movimientos a ERROR, timeouts o fallos de comando</p>
+              </div>
+            </div>
+            <div class="log-card">
+              <pre id="log-errors" class="log log-error"></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-card" id="webhook-panel">
+          <div class="section-head">
+            <div>
+              <h2>Notificaciones CUPS</h2>
+              <p>Últimos eventos recibidos por el webhook HTTP</p>
+            </div>
+            <button id="refresh-webhook" class="btn secondary">Actualizar eventos</button>
+          </div>
+          <div class="log-card">
+            <div class="log-meta">
+              <span id="webhook-updated">Actualizado -</span>
+              <span class="dot"></span>
+              <span id="webhook-count">0 eventos</span>
+            </div>
+            <div id="webhook-events" class="webhook-list">
+              <p class="origin-empty">Sin notificaciones recientes.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="view" data-view="config">
+        <div class="view-header">
+          <button class="btn ghost nav-back" data-nav-target="dashboard">← Dashboard</button>
+          <div>
+            <p class="eyebrow">Configuración</p>
+            <h2>Acciones y mantenimiento</h2>
+          </div>
+          <div class="view-actions">
+            <button id="refresh-config" class="btn secondary">Actualizar datos</button>
+          </div>
+        </div>
+
+        <section class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Reiniciar servicios</h2>
+              <p>Aplica cambios en watch_print.ini o cola CUPS sin salir del panel</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button data-service="listener" class="btn secondary restart">
+              <span>Reiniciar listener</span>
+            </button>
+            <button data-service="cups" class="btn secondary restart">
+              <span>Reiniciar CUPS</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Clonar impresora</h2>
+              <p>Replica PPD y opciones clave de otra cola</p>
+            </div>
+          </div>
+          <form id="clone-form" class="form-card">
+            <div class="form-row">
+              <label for="source">Origen</label>
+              <input id="source" name="source" placeholder="MKP2" required />
+            </div>
+            <div class="form-row">
+              <label for="target">Destino</label>
+              <input id="target" name="target" placeholder="MKP4" required />
+            </div>
+            <div class="form-row">
+              <label for="target_uri">URI destino</label>
+              <input id="target_uri" name="target_uri" placeholder="socket://10.10.20.164" required />
+            </div>
+            <div class="form-row">
+              <label for="description">Descripción</label>
+              <input id="description" name="description" placeholder="Alias mostrado (opcional)" />
+            </div>
+            <label class="checkbox">
+              <input type="checkbox" id="add_alias" name="add_alias" checked />
+              Añadir a [Printers] de watch_print.ini
+            </label>
+            <button type="submit" class="btn primary">Clonar</button>
+            <pre id="clone-result" class="output" aria-live="polite"></pre>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <template id="service-card-template">
+      <article class="service-card">
+        <div class="service-icon">⚙️</div>
+        <div class="service-body">
+          <div class="service-head">
+            <h3></h3>
+            <span class="badge"></span>
+          </div>
+          <pre class="status-text"></pre>
+        </div>
+      </article>
+    </template>
+
+    <template id="printer-card-template">
+      <article class="printer-card">
+        <div class="printer-head">
+          <div class="printer-icon">🖨️</div>
+          <div>
+            <h3></h3>
+            <p class="state"></p>
+          </div>
+        </div>
+        <dl></dl>
+      </article>
+    </template>
+
+    <div id="toast" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>

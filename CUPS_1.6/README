@@ -1,0 +1,49 @@
+------------------------------------------------------------
+README    -   Description of software package
+------------------------------------------------------------
+
+This software package contains a CUPS driver for Intermec
+Direct Protocol printers. To install the driver follow the
+instructions in the INSTALL file. To use the driver follow
+the standard CUPS procedure for printing.
+
+
+File listing:
+
+INSTALL
+ - Installation instructions
+
+LICENSE
+ - License text
+
+README
+ - This file
+
+build.sh
+ - Script to build and install the package to system
+
+configure.ac
+ - Input to generate configure script
+
+Makefile.am
+ - Input to generate Makefile
+
+src/intermec-dp-drv
+ - Wrapper script which provides CUPS filter
+
+src/pbmtodp.c
+ - Utility to convert plain 1-bit PBM to Direct Protocol PRBUF format
+
+src/generic-dp_intermec.drv
+src/generic-dp_honeywell.drv
+ - Printer profile description (ppdc)
+
+src/ppdintermec/*.ppd
+ - Printer profiles for Intermec Direct Protocol printers
+
+src/ppdhoneywell/*.ppd
+ - Printer profiles for Honeywell Direct Protocol printers
+
+src/Makefile.am
+ - Input to generate Makefile
+

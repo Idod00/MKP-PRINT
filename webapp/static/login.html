@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acceso | MKP Panel Operativo</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="login-body">
+    <div class="bg-glow"></div>
+    <main class="auth-view">
+      <form id="login-form" class="auth-card">
+        <div class="auth-icon">🖨️</div>
+        <h1>MKP Panel Operativo</h1>
+        <p>Ingresa tus credenciales para continuar.</p>
+        <label>
+          Usuario
+          <input name="username" autocomplete="username" required />
+        </label>
+        <label>
+          Contraseña
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <div id="login-error" class="auth-error" hidden></div>
+        <button type="submit" id="login-submit" class="btn primary full">Iniciar sesión</button>
+      </form>
+    </main>
+    <div id="toast" hidden></div>
+    <script src="/static/login.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,575 @@
+#!/bin/bash
+
+# intermec-dp-drv 
+#
+# CUPS filter wrapper script, converting incoming PDF stream to Intermec
+# Direct Protocol.
+#
+# Copyright (C) 2012 Intermec Technologies Pte Ltd
+#
+
+# Debug log during development
+echo "intermec-dp-drv: ${@}" | logger
+
+# Base path for temporary files
+TMPBASEPATH="/tmp/intermec-dp-drv-$$"
+
+# delete_temp_files() deletes all temporary files used for printing conversion
+delete_temp_files()
+{
+  rm -f ${TMPBASEPATH}*
+}
+
+# exit_with_error() prints out troubleshooting message in actual print job
+exit_with_error()
+{
+  echo "Printing not complete" >> ${TMPBASEPATH}.log 
+
+  # Switch to Direct Protocol
+  echo "INPUT ON"
+
+  # Clear image buffer
+  echo "CLL"
+
+  # Enable clipping (rendering of object larger than image buffer)
+  echo "CLIP ON"
+
+  # Dump error message
+  echo "PP 50,800 : PT \"Error: ${ERRMSG}\""
+
+  # Dump log file content
+  echo "PP 50,700 : PT \"Log file:\""
+  LOGFILE="`cat ${TMPBASEPATH}.log | sed 's/ /_/g' | sed 's/\"/ /g'`"
+  LOGPOS="600"
+  for LOGLINE in $LOGFILE ;
+  do
+    echo "PP 50,${LOGPOS} : PT \"${LOGLINE}\""
+    let LOGPOS=${LOGPOS}-100
+
+    if ["${LOGPOS}" == "0"]; then
+      break
+    fi
+  done
+
+  echo "PF1"
+
+  # Delete temporary files
+  delete_temp_files
+
+  exit 1;
+}
+
+# Input data in PS or PDF format
+cat <&0 > ${TMPBASEPATH}.in
+
+# Check input data and convert from PS if needed
+head -1 ${TMPBASEPATH}.in | grep PDF > /dev/null
+ISPDF="$?"
+head -1 ${TMPBASEPATH}.in | grep PS > /dev/null
+ISPS="$?"
+
+if [ ${ISPS} = "0" ]; then
+  # Convert PS data to PDF
+  ps2pdf ${TMPBASEPATH}.in - > ${TMPBASEPATH}.pdf
+else 
+  if [ ${ISPDF} != "0" ]; then
+    logger "neither PDF nor PS data provided to driver, exiting"
+    # Delete temporary files
+    delete_temp_files
+    exit 1;
+  else
+    # Input data PDF is simply passed on
+    cp ${TMPBASEPATH}.in ${TMPBASEPATH}.pdf
+  fi
+fi
+
+
+# Configure printer settings
+
+# Set default values
+resolution=203
+dithering=0.5
+colormode=gray
+foundcopy=0
+collate=no
+
+# Loop through arguments
+for ARG in ${@} ;
+do
+  param=`echo ${ARG} | cut -f 1 -d '='`
+  value=`echo ${ARG} | cut -f 2 -d '='`
+
+  if [ ${value} != ${param} ]; then
+    if [ ${foundcopy} = 0 ]; then
+      COPIES=${tmpcopies}
+      let foundcopy=1
+    fi
+  fi
+
+  case "${param}" in
+    Collate)
+      case "${value}" in
+        Collate)
+          logger "Set Collate Mode"
+          collate=yes
+          ;;
+        *)
+          logger "Don't set collate"
+          ;;
+      esac
+      ;;
+    MediaType)
+      case "${value}" in
+        Direct)
+          logger "Set Direct Thermal"
+          echo "SETUP \"MEDIA,PAPER TYPE,DIRECT THERMAL\""
+          ;;
+        Thermal)
+          logger "Set Thermal Transfer"
+          echo "SETUP \"MEDIA,PAPER TYPE,THERMAL TRANSFER\""
+          ;;
+        *)
+          logger "Dont change paper type"
+          ;;
+      esac
+      ;;
+    PageSize)
+      logger "2 = ${param} - ${value}"
+        
+      ;;
+
+    inPrintSpeed)
+      case "${value}" in
+        2)
+          logger "Set Print Speed 50"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,50\""
+          ;;
+        3)
+          logger "Set Print Speed 75"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,75\""
+          ;;
+        4)
+          logger "Set Print Speed 100"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,100\""
+          ;;
+        5)
+          logger "Set Print Speed 125"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,125\""
+          ;;
+        6)
+          logger "Set Print Speed 150"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,150\""
+          ;;
+        7)
+          logger "Set Print Speed 175"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,175\""
+          ;;
+        8)
+          logger "Set Print Speed 200"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,200\""
+          ;;
+        9)
+          logger "Set Print Speed 225"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,225\""
+          ;;
+        10)
+          logger "Set Print Speed 250"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,250\""
+          ;;
+        11)
+          logger "Set Print Speed 275"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,275\""
+          ;;
+        12)
+          logger "Set Print Speed 300"
+          echo "SETUP \"PRINT DEFS,PRINT SPEED,300\""
+          ;;
+        *)
+          logger "Dont change print speed"
+          ;;
+      esac
+      ;;
+
+      inMediaType)
+        case "${value}" in
+          Gap)
+            logger "Set Label With Gaps"
+            echo "SETUP \"MEDIA,MEDIA TYPE,LABEL (w GAPS)\""
+            ;;
+          Mark)
+            logger "Set Ticket With Mark"
+            echo "SETUP \"MEDIA,MEDIA TYPE,TICKET (w MARK)\""
+            ;;
+          ContVar)
+            logger "Set Continuous Variable Length"
+            echo "SETUP \"MEDIA,MEDIA TYPE,VAR LENGTH STRIP\""
+            ;;
+          ContFix)
+            logger "Set Continuous Fixed Length"
+            echo "SETUP \"MEDIA,MEDIA TYPE,FIX LENGTH STRIP\""
+            ;;
+          *)
+            logger "Dont change media type"
+            ;;
+        esac
+        ;;
+
+      inStartAdjust)
+        case "${value}" in
+          -1000)
+            logger "Dont change start adjust"
+            ;;
+          *)
+            logger "Set Start Adjustment to ${value}"
+            echo "SETUP \"FEEDADJ,STARTADJ,${value}\""
+            ;;
+        esac
+        ;;
+
+      inStopAdjust)
+        case "${value}" in
+          -1000)
+            logger "Dont change stop adjust"
+            ;;
+          *)
+            logger "Set Stop Adjustment to ${value}"
+            echo "SETUP \"FEEDADJ,STOPADJ,${value}\""
+            ;;
+        esac
+        ;;
+
+      inDarkness)
+        logger "Set Darkness to ${value}"
+        echo "SETUP \"Printing,Print Quality,Darkness,${value}\""
+        ;;
+
+      inDithering)
+        logger "Set Dithering to 0.${value}"
+        dithering="0.${value}"
+        ;;
+
+      inColormode)
+        logger "Set Color to ${value}"
+        colormode="${value}"
+        ;;
+
+      inSensitivity)
+        case "${value}" in
+          VeryLow)
+            logger "Set Media Sensitivity to ${value}"
+            echo "SETUP \"Printing,Print Quality,Media Sensitivity,Very Low\""
+            ;;
+          Low)
+            logger "Set Media Sensitivity to ${value}"
+            echo "SETUP \"Printing,Print Quality,Media Sensitivity,Low\""
+            ;;
+          Medium)
+            logger "Set Media Sensitivity to ${value}"
+            echo "SETUP \"Printing,Print Quality,Media Sensitivity,Medium\""
+            ;;
+          High)
+            logger "Set Media Sensitivity to ${value}"
+            echo "SETUP \"Printing,Print Quality,Media Sensitivity,High\""
+            ;;
+          VeryHigh)
+            logger "Set Media Sensitivity to ${value}"
+            echo "SETUP \"Printing,Print Quality,Media Sensitivity,Very High\""
+            ;;
+          *)
+            logger "Dont change media sensitivity"
+            ;;
+        esac
+        ;;
+
+      inResolution)
+        case "${value}" in
+          203dpi)
+            logger "Set Resolution to ${value}"
+            resolution=203
+            ;;
+          300dpi)
+            logger "Set Resolution to ${value}"
+            resolution=300
+            ;;
+          406dpi)
+            logger "Set Resolution to ${value}"
+            resolution=406
+            ;;
+          600dpi)
+            logger "Set Resolution to ${value}"
+            resolution=600
+            ;;
+          *)
+            logger "Default Resolution to ${value}"
+            resolution=203
+            ;;
+        esac
+        ;;
+
+      *)
+        logger "Ignore: ${param} - ${value}"
+        
+        # The last argument before first attribute is the copies
+        tmpcopies=${param}  
+        ;;
+    esac
+  done
+
+  # Set Media Size based on Resolution
+  case "${resolution}" in 
+    203)
+      ;;
+
+    300)
+      ;;
+
+    406)
+      ;;
+	  
+    600)
+      ;;
+    *)
+      ;;
+  esac
+
+# Make sure the value of COPIES is a number
+if ! [[ ${COPIES} =~ ^[0-9]+$ ]]; then
+  COPIES=1
+fi
+
+logger "Copies: ${COPIES}"
+
+# Everything in this world is not logical
+if [ "${colormode}" = "bw" ]; then
+  # Convert PDF to PGM using pdftoppm (black and white)
+  pdftoppm -r ${resolution} -gray ${TMPBASEPATH}.pdf ${TMPBASEPATH}-pgm >> \
+  ${TMPBASEPATH}.log 2>> ${TMPBASEPATH}.log
+else
+  # Convert PDF to PBM using pdftoppm (gray scale)
+  pdftoppm -r ${resolution} -mono ${TMPBASEPATH}.pdf ${TMPBASEPATH}-pbm >> \
+  ${TMPBASEPATH}.log 2>> ${TMPBASEPATH}.log
+fi
+
+# Check and remove zero padding PGM filenames
+PAGENO=1
+if [ ! -f "${TMPBASEPATH}-pgm-${PAGENO}.pgm" ]; then
+  for f in ${TMPBASEPATH}-pgm*.pgm 
+  do 
+    mv $f ${TMPBASEPATH}-pgm-${PAGENO}.pgm
+    logger "Copy $f ${TMPBASEPATH}-pgm-${PAGENO}.pgm"
+    let PAGENO=${PAGENO}+1
+  done
+fi
+
+# Convert PGM to PBM using pgmtopbm
+PAGENO=1
+while [ 1 ]
+do
+  # Check if PBM file exists
+  if [ -f "${TMPBASEPATH}-pgm-${PAGENO}.pgm" ]; then
+
+    pgmtopbm -threshold -value ${dithering} ${TMPBASEPATH}-pgm-${PAGENO}.pgm \
+      > ${TMPBASEPATH}-pbm-${PAGENO}.pbm 2>> ${TMPBASEPATH}.log
+
+    logger "${dithering}"
+    logger "pgmtopbm -threshold -value ${dithering} ${TMPBASEPATH}-pgm-${PAGENO}.pgm  > ${TMPBASEPATH}-pbm-${PAGENO}.pbm 2>> ${TMPBASEPATH}.log"
+    let PAGENO=${PAGENO}+1
+  else
+    break;
+  fi
+done
+
+# XXX: Implement proper return status checking for pdftoppm and pbmtopbm
+
+# Check return status of pdftoppm
+RV="$?"
+if [ "${RV}" -ne "0" ]; then
+  # Interpret exit code
+  case "${RV}" in
+    0)
+    ERRMSG="pdftoppm return (${RV}): No error."
+    ;;
+    1)
+    ERRMSG="pdftoppm return (${RV}): Error opening a PDF file."
+    ;;
+    2)
+    ERRMSG="pdftoppm return (${RV}): Error opening an output file."
+    ;;
+    3)
+    ERRMSG="pdftoppm return (${RV}): Error related to PDF permissions."
+    ;;
+    99)
+    ERRMSG="pdftoppm return (${RV}): Other error."
+    ;;
+    *)
+    ERRMSG="pdftoppm return (${RV}): Unknown error."
+    ;;
+  esac
+
+  exit_with_error
+
+else
+  # Succesfully converted to PBM
+  # Check and remove zero padding PBM filenames
+  PAGENO=1
+  if [ ! -f "${TMPBASEPATH}-pbm-${PAGENO}.pbm" ]; then
+    for f in ${TMPBASEPATH}-pbm*.pbm 
+    do 
+      mv $f ${TMPBASEPATH}-pbm-${PAGENO}.pbm
+      let PAGENO=${PAGENO}+1
+    done
+  fi
+
+  # If not collating then print each page COPIES time
+  if [ "${collate}" = "no" ]; then
+
+    PAGENO=1
+    while [ 1 ]
+    do
+      # Check if PBM file exists
+      if [ -f "${TMPBASEPATH}-pbm-${PAGENO}.pbm" ]; then
+
+        # Convert to plain PNM/PBM
+        pnmtoplainpnm ${TMPBASEPATH}-pbm-${PAGENO}.pbm > \
+            ${TMPBASEPATH}-pbm-${PAGENO}.ppbm 2>> ${TMPBASEPATH}.log
+              
+        # Check return value
+        RV="$?"
+        if [ "${RV}" -ne "0" ]; then
+          ERRMSG="pnmtoplainpnm failed on page ${PAGENO}, exiting."
+          break;
+        else
+          # Convert plain PNM/PBM to Direct Protocol PRBUF format
+          pbmtodp < ${TMPBASEPATH}-pbm-${PAGENO}.ppbm > \
+              ${TMPBASEPATH}-pbm-${PAGENO}.dp 2>> ${TMPBASEPATH}.log
+                  
+          # Check return value
+          RV="$?"
+          if [ "${RV}" -ne "0" ]; then
+            ERRMSG="pbmtodp failed on page ${PAGENO}, exiting."
+            exit_with_error
+          else
+                      
+            # Get output data length
+            CNT="`wc -c ${TMPBASEPATH}-pbm-${PAGENO}.dp`"
+            LN="`echo ${CNT} | cut -f1 -d' '`"
+            logger "PRBUF size: ${LN}"
+                      
+            # Generate full output label in DP format
+                      
+            # Switch to Direct Protocol
+            echo "INPUT ON"
+                      
+            # Clear image buffer
+            echo "CLL"
+                      
+            # Enable clipping (rendering of object larger than image buffer)
+            echo "CLIP ON"
+                      
+            # Use PRBUF protocol to send print job
+            echo "PRBUF ${LN}"
+            cat ${TMPBASEPATH}-pbm-${PAGENO}.dp
+            echo ""
+                      
+            # Printfeed (N copies)
+            echo "PF ${COPIES}"
+                      
+            # Log progress
+            echo "Printed label ${PAGENO}" >> ${TMPBASEPATH}.log 
+          fi
+        fi
+      else
+        break;
+      fi
+
+      # Increment counter, step to next page/label
+      let PAGENO=${PAGENO}+1
+          
+    done
+  # Print in collating mode
+  else
+ 
+    PAGENO=1
+    # Print one full set at a time
+    while [ ${COPIES} -ne 0 ]
+    do
+
+      # Print each page once
+      while [ 1 ]
+      do
+        # Check if PBM file exists
+        if [ -f "${TMPBASEPATH}-pbm-${PAGENO}.pbm" ]; then
+
+          # Convert to plain PNM/PBM
+          pnmtoplainpnm ${TMPBASEPATH}-pbm-${PAGENO}.pbm > \
+              ${TMPBASEPATH}-pbm-${PAGENO}.ppbm 2>> ${TMPBASEPATH}.log
+              
+          # Check return value
+          RV="$?"
+          if [ "${RV}" -ne "0" ]; then
+            ERRMSG="pnmtoplainpnm failed on page ${PAGENO}, exiting."
+            break;
+          else
+            # Convert plain PNM/PBM to Direct Protocol PRBUF format
+            pbmtodp < ${TMPBASEPATH}-pbm-${PAGENO}.ppbm > \
+                ${TMPBASEPATH}-pbm-${PAGENO}.dp 2>> ${TMPBASEPATH}.log
+                  
+            # Check return value
+            RV="$?"
+            if [ "${RV}" -ne "0" ]; then
+              ERRMSG="pbmtodp failed on page ${PAGENO}, exiting."
+              exit_with_error
+            else
+                      
+              # Get output data length
+              CNT="`wc -c ${TMPBASEPATH}-pbm-${PAGENO}.dp`"
+              LN="`echo ${CNT} | cut -f1 -d' '`"
+              logger "PRBUF size: ${LN}"
+                      
+              # Generate full output label in DP format
+                      
+              # Switch to Direct Protocol
+              echo "INPUT ON"
+                      
+              # Clear image buffer
+              echo "CLL"
+                      
+              # Enable clipping (rendering of object larger than image buffer)
+              echo "CLIP ON"
+                      
+              # Use PRBUF protocol to send print job
+              echo "PRBUF ${LN}"
+              cat ${TMPBASEPATH}-pbm-${PAGENO}.dp
+              echo ""
+                      
+              # Printfeed (N copies)
+              echo "PF"
+                      
+              # Log progress
+              echo "Printed label ${PAGENO}" >> ${TMPBASEPATH}.log 
+            fi
+          fi
+        else
+          break;
+        fi
+
+        # Increment counter, step to next page/label
+        let PAGENO=${PAGENO}+1
+        
+      done
+
+      let COPIES=${COPIES}-1
+    done
+  fi
+
+  echo "Printing complete" >> ${TMPBASEPATH}.log
+
+  # Delete temporary files
+  delete_temp_files
+
+  # Exit OK
+  exit 0;
+fi
+
+exit_with_error
+

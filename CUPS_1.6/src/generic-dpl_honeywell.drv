@@ -1,0 +1,224 @@
+// CUPS PPD Compiler CUPS v1.4.3
+
+// Include necessary files...
+#include <font.defs>
+#include <media.defs>
+
+// Honeywell DPL Printer
+Copyright ""
+Copyright "honeywell-generic-dpl.ppd"
+Copyright ""
+Copyright "Add description here.."
+Copyright "http://www.cups.org/documentation.php/postscript-driver.html"
+Copyright ""
+Manufacturer "Honeywell"
+Version "1.3"
+DriverType ps
+ModelNumber 1
+Throughput 8
+
+// Printer attributes
+Attribute "Product" "" "(Generic DPL)"
+Attribute "PSVersion" "" "(3010.000) 550"
+Attribute "PSVersion" "" "(3010.000) 651"
+Attribute "PSVersion" "" "(3010.000) 652"
+Attribute "PSVersion" "" "(3010.000) 653"
+Attribute "PSVersion" "" "(3010.000) 704"
+Attribute "PSVersion" "" "(3010.000) 705"
+Attribute "PSVersion" "" "(3010.000) 707"
+Attribute "PSVersion" "" "(3010.000) 800"
+Attribute "LanguageLevel" "" "3"
+Attribute "DriverType" "" "custom"
+Attribute "DefaultColorSpace" "" "Gray"
+Attribute "FileSystem" "" "False"
+Attribute "LandscapeOrientation" "" "Plus90"
+Attribute "TTRasterizer" "" "Type42"
+Attribute "RequiresPageRegion" "All" "True"
+
+// Filters supported
+Filter "application/vnd.cups-pdf 0 /usr/bin/honeywell-dpl-drv"
+Filter "application/vnd.cups-postscript 100 /usr/bin/honeywell-dpl-drv"
+
+// Font list
+Font "AvantGarde-Book" "Standard" "(001.006S)" "Standard" ROM
+Font "AvantGarde-BookOblique" "Standard" "(001.006S)" "Standard" ROM
+Font "AvantGarde-Demi" "Standard" "(001.007S)" "Standard" ROM
+Font "AvantGarde-DemiOblique" "Standard" "(001.007S)" "Standard" ROM
+Font "Bookman-Demi" "Standard" "(001.004S)" "Standard" ROM
+Font "Bookman-DemiItalic" "Standard" "(001.004S)" "Standard" ROM
+Font "Bookman-Light" "Standard" "(001.004S)" "Standard" ROM
+Font "Bookman-LightItalic" "Standard" "(001.004S)" "Standard" ROM
+Font "Courier" "Standard" "(002.004S)" "Standard" ROM
+Font "Courier-Bold" "Standard" "(002.004S)" "Standard" ROM
+Font "Courier-BoldOblique" "Standard" "(002.004S)" "Standard" ROM
+Font "Courier-Oblique" "Standard" "(002.004S)" "Standard" ROM
+Font "Helvetica" "Standard" "(001.006S)" "Standard" ROM
+Font "Helvetica-Bold" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-BoldOblique" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-Narrow" "Standard" "(001.006S)" "Standard" ROM
+Font "Helvetica-Narrow-Bold" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-Narrow-BoldOblique" "Standard" "(001.007S)" "Standard" ROM
+Font "Helvetica-Narrow-Oblique" "Standard" "(001.006S)" "Standard" ROM
+Font "Helvetica-Oblique" "Standard" "(001.006S)" "Standard" ROM
+Font "NewCenturySchlbk-Bold" "Standard" "(001.009S)" "Standard" ROM
+Font "NewCenturySchlbk-BoldItalic" "Standard" "(001.007S)" "Standard" ROM
+Font "NewCenturySchlbk-Italic" "Standard" "(001.006S)" "Standard" ROM
+Font "NewCenturySchlbk-Roman" "Standard" "(001.007S)" "Standard" ROM
+Font "Palatino-Bold" "Standard" "(001.005S)" "Standard" ROM
+Font "Palatino-BoldItalic" "Standard" "(001.005S)" "Standard" ROM
+Font "Palatino-Italic" "Standard" "(001.005S)" "Standard" ROM
+Font "Palatino-Roman" "Standard" "(001.005S)" "Standard" ROM
+Font "Symbol" "Special" "(001.007S)" "Special" ROM
+Font "Times-Bold" "Standard" "(001.007S)" "Standard" ROM
+Font "Times-BoldItalic" "Standard" "(001.009S)" "Standard" ROM
+Font "Times-Italic" "Standard" "(001.007S)" "Standard" ROM
+Font "Times-Roman" "Standard" "(001.007S)" "Standard" ROM
+Font "ZapfChancery-MediumItalic" "Standard" "(001.007S)" "Standard" ROM
+Font "ZapfDingbats" "Special" "(001.004S)" "Standard" ROM
+
+
+// Media settings
+//Group "MediaSettings/Media Settings"
+//  Option "inMediaType/Media Type" PickOne AnySetup 20.0
+//    *Choice "Default/Use Printer Setting" "<</cupsString0(Default)>>setpagedevice"
+//    Choice "Gap/Media With Gaps" "<</cupsString0(Gap)>>setpagedevice"
+//    Choice "MarkBot/Bottom Black Mark" "<</cupsString0(Mark)>>setpagedevice"
+//    Choice "MarkTop/Top Black Mark" "<</cupsString0(ContVar)>>setpagedevice"
+//    Choice "Cont/Continuous" "<</cupsString0(ContFix)>>setpagedevice"
+
+// Print quality settings
+Group "PrintQuality/Print Quality"
+  Option "inResolution/TPH Resolution" PickOne AnySetup 20.0
+    *Choice "203dpi/203 dpi" "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+    Choice "300dpi/300 dpi" "<</HWResolution[300 300]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+  //Option "inPrintSpeed/Print Speed" PickOne AnySetup 20.0
+  //  *Choice "Default/Use Printer Setting" ""
+  //  Choice "1/1 (inches/sec) " "<</cupsString1(2)>>setpagedevice"
+  //  Choice "1.5/1.5 (inches/sec) " "<</cupsString1(2)>>setpagedevice"
+  //  Choice "2/2 (inches/sec)" "<</cupsString1(3)>>setpagedevice"
+  //  Choice "2.5/2.5 (inches/sec)" "<</cupsString1(3)>>setpagedevice"
+  //  Choice "3/3 (inches/sec)" "<</cupsString1(4)>>setpagedevice"
+  //  Choice "3.5/3.5 (inches/sec)" "<</cupsString1(4)>>setpagedevice"
+  //  Choice "4/4 (inches/sec)" "<</cupsString1(5)>>setpagedevice"
+  //  Choice "4.5/4.5 (inches/sec)" "<</cupsString1(5)>>setpagedevice"
+  //  Choice "5/5 (inches/sec)" "<</cupsString1(6)>>setpagedevice"
+  Option "inColormode/Color Mode" PickOne AnySetup 20.0
+    *Choice "bw/Black/White" "<</cupsString4(8)>>setpagedevice"
+    Choice "gray/Gray" "<</cupsString4(9)>>setpagedevice"
+  Option "inDarkness/Darkness" PickOne AnySetup 20.0
+  //  *Choice "-1/Use Printer Setting" "<</cupsCompression -1>>setpagedevice"
+  //  Choice "5/5" "<</cupsCompression 5>>setpagedevice"
+  //  Choice "10/10" "<</cupsCompression 15>>setpagedevice"
+  //  Choice "15/15" "<</cupsCompression 25>>setpagedevice"
+  //  Choice "20/20" "<</cupsCompression 35>>setpagedevice"
+  //  Choice "25/25" "<</cupsCompression 45>>setpagedevice"
+  //  Choice "30/30" "<</cupsCompression 55>>setpagedevice"
+
+// Custom media definition - 1 inch wide
+CustomMedia "in.1x1/1.00x1.00\"" 72.00 72.00 0.00 0.00 0.00 0.00 "<</PageSize[72 72]/ImagingBBox null>>setpagedevice" "<</PageSize[72 72]/ImagingBBox null>>setpagedevice"
+
+// Custom media definition - 2 inch wide
+CustomMedia "in.2x1/2.00x1.00\"" 144.00 72.00 0.00 0.00 0.00 0.00 "<</PageSize[144 72]/ImagingBBox null>>setpagedevice" "<</PageSize[144 72]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.2x2/2.00x2.00\"" 144.00 144.00 0.00 0.00 0.00 0.00 "<</PageSize[144 144]/ImagingBBox null>>setpagedevice" "<</PageSize[144 144]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.2x3/2.00x3.00\"" 144.00 216.00 0.00 0.00 0.00 0.00 "<</PageSize[144 216]/ImagingBBox null>>setpagedevice" "<</PageSize[144 216]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.2x4/2.00x4.00\"" 144.00 288.00 0.00 0.00 0.00 0.00 "<</PageSize[144 288]/ImagingBBox null>>setpagedevice" "<</PageSize[144 288]/ImagingBBox null>>setpagedevice"
+
+// Custom media definition - 4 inch wide
+CustomMedia "in.4x1/4.00x1.00\"" 288.00 72.00 0.00 0.00 0.00 0.00 "<</PageSize[288 72]/ImagingBBox null>>setpagedevice" "<</PageSize[288 72]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x2/4.00x2.00\"" 288.00 144.00 0.00 0.00 0.00 0.00 "<</PageSize[288 144]/ImagingBBox null>>setpagedevice" "<</PageSize[288 144]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x3/4.00x3.00\"" 288.00 216.00 0.00 0.00 0.00 0.00 "<</PageSize[288 216]/ImagingBBox null>>setpagedevice" "<</PageSize[288 216]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x4/4.00x4.00\"" 288.00 288.00 0.00 0.00 0.00 0.00 "<</PageSize[288 288]/ImagingBBox null>>setpagedevice" "<</PageSize[288 288]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x5/4.00x5.00\"" 288.00 360.00 0.00 0.00 0.00 0.00 "<</PageSize[288 360]/ImagingBBox null>>setpagedevice" "<</PageSize[288 360]/ImagingBBox null>>setpagedevice"
+*CustomMedia "in.4x6/4.00x6.00\"" 288.00 432.00 0.00 0.00 0.00 0.00 "<</PageSize[288 432]/ImagingBBox null>>setpagedevice" "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x7/4.00x7.00\"" 288.00 504.00 0.00 0.00 0.00 0.00 "<</PageSize[288 504]/ImagingBBox null>>setpagedevice" "<</PageSize[288 504]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.4x8/4.00x8.00\"" 288.00 576.00 0.00 0.00 0.00 0.00 "<</PageSize[288 576]/ImagingBBox null>>setpagedevice" "<</PageSize[288 576]/ImagingBBox null>>setpagedevice"
+
+// Custom media definition - 6 inch wide
+CustomMedia "in.6x4/6.00x4.00\"" 432.00 288.00 0.00 0.00 0.00 0.00 "<</PageSize[432 288]/ImagingBBox null>>setpagedevice" "<</PageSize[432 288]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.6x6/6.00x6.00\"" 432.00 432.00 0.00 0.00 0.00 0.00 "<</PageSize[432 432]/ImagingBBox null>>setpagedevice" "<</PageSize[432 432]/ImagingBBox null>>setpagedevice"
+CustomMedia "in.6x8/6.00x8.00\"" 432.00 576.00 0.00 0.00 0.00 0.00 "<</PageSize[432 576]/ImagingBBox null>>setpagedevice" "<</PageSize[432 576]/ImagingBBox null>>setpagedevice"
+
+// General media definitions
+VariablePaperSize Yes
+MinSize 36.00 36.00
+MaxSize 576.00 3600.00
+
+/////////////////////////////////////////////////////
+// Printer specific model names and device strings //
+/////////////////////////////////////////////////////
+
+//Generic DPL Printer
+{
+  ModelName "Generic DPL"
+  PCFileName "honeywell-dpl.ppd"
+
+  Attribute "NickName" "" "Honeywell Generic DPL"
+  Attribute "ShortNickName" "" "Generic DPL"
+}
+// End of Generic DP Printer
+
+// RP and MP Printers
+{
+  ModelName "RP2-DPL"
+  PCFileName "honeywell-dpl-rp2.ppd"
+
+  Attribute "NickName" "" "Honeywell RP2"
+  Attribute "ShortNickName" "" "RP2"
+  Attribute "1284DeviceID" "" "MFG:Honeywell ;MDL:RP2;"
+}
+
+{
+  ModelName "RP4-DPL"
+  PCFileName "honeywell-dpl-rp4.ppd"
+
+  Attribute "NickName" "" "Honeywell RP4"
+  Attribute "ShortNickName" "" "RP4"
+  Attribute "1284DeviceID" "" "MFG:Honeywell ;MDL:RP4;"
+}
+
+{
+  ModelName "MPCompact4 MIII 203DPI-DPL"
+  PCFileName "honeywell-dpl-mpcompact4-203.ppd"
+
+  Attribute "NickName" "" "Honeywell MP Compact4 MIII (203dpi)"
+  Attribute "ShortNickName" "" "MPCompact4 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:D-O ;MDL:MP Compact4 Mark III (203);"
+}
+
+{
+  ModelName "MPCompact4 MIII 300DPI-DPL"
+  PCFileName "honeywell-dpl-mpcompact4-300.ppd"
+
+  Attribute "NickName" "" "Honeywell MP Compact4 MIII (300dpi)"
+  Attribute "ShortNickName" "" "MPCompact4 (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:D-O ;MDL:MP Compact4 Mark III (300);"
+}
+
+{
+  ModelName "MPNova4 MII 203DPI-DPL"
+  PCFileName "honeywell-dpl-mpnova4-203.ppd"
+
+  Attribute "NickName" "" "Honeywell MP Nova4 MII (203dpi)"
+  Attribute "ShortNickName" "" "MPNova4 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:D-O ;MDL:MP Nova4 Mark II (203);"
+}
+
+{
+  ModelName "MPNova6 MII 203DPI-DPL"
+  PCFileName "honeywell-dpl-mpnova6-203.ppd"
+
+  Attribute "NickName" "" "Honeywell MP Nova6 MII (203dpi)"
+  Attribute "ShortNickName" "" "MPNova6 (203dpi)"
+  Attribute "1284DeviceID" "" "MFG:D-O ;MDL:MP Nova6 Mark II (203);"
+}
+
+{
+  ModelName "MPNova4 MII 300DPI-DPL"
+  PCFileName "honeywell-dpl-mpnova4-300.ppd"
+
+  Attribute "NickName" "" "Honeywell MP Nova4 MII (300dpi)"
+  Attribute "ShortNickName" "" "MPNova4 (300dpi)"
+  Attribute "1284DeviceID" "" "MFG:D-O ;MDL:MP Nova4 Mark II (300);"
+}
+// End of RP & MP Printers
+

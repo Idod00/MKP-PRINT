@@ -1,0 +1,289 @@
+*PPD-Adobe: "4.3"
+*%%%% PPD file for PM4i-DP with CUPS.
+*%%%% Created by the CUPS PPD Compiler CUPS v2.4.7.
+*% 
+*% intermec-generic-dp.ppd
+*% 
+*% Add description here..
+*% http://www.cups.org/documentation.php/postscript-driver.html
+*% 
+*FormatVersion: "4.3"
+*FileVersion: "1.2"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*PCFileName: "intermec-dp-pm4i-300.ppd"
+*Product: "(Generic Direct Protocol)"
+*Manufacturer: "Intermec"
+*ModelName: "Intermec PM4i-DP"
+*ShortNickName: "PM4i (300dpi)"
+*NickName: "Intermec PM4i (300dpi)"
+*PSVersion: "(3010.000) 550"
+*PSVersion: "(3010.000) 651"
+*PSVersion: "(3010.000) 652"
+*PSVersion: "(3010.000) 653"
+*PSVersion: "(3010.000) 704"
+*PSVersion: "(3010.000) 705"
+*PSVersion: "(3010.000) 707"
+*PSVersion: "(3010.000) 800"
+*LanguageLevel: "3"
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*FileSystem: False
+*Throughput: "8"
+*LandscapeOrientation: Plus90
+*TTRasterizer: Type42
+*% Driver-defined attributes...
+*DriverType: "custom"
+*RequiresPageRegion All: True
+*1284DeviceID: "MFG:Intermec;MDL:PM4i(300)FP;"
+*cupsVersion: 2.4
+*cupsModelNumber: 1
+*cupsManualCopies: False
+*cupsFilter: "application/vnd.cups-pdf 0 /usr/bin/intermec-dp-drv"
+*cupsFilter: "application/vnd.cups-postscript 100 /usr/bin/intermec-dp-drv"
+*cupsLanguages: "en"
+*OpenUI *PageSize/Media Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: in.4x6
+*PageSize in.1x1/1.00x1.00": "<</PageSize[72 72]/ImagingBBox null>>setpagedevice"
+*PageSize in.2x1/2.00x1.00": "<</PageSize[144 72]/ImagingBBox null>>setpagedevice"
+*PageSize in.2x2/2.00x2.00": "<</PageSize[144 144]/ImagingBBox null>>setpagedevice"
+*PageSize in.2x3/2.00x3.00": "<</PageSize[144 216]/ImagingBBox null>>setpagedevice"
+*PageSize in.2x4/2.00x4.00": "<</PageSize[144 288]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x1/4.00x1.00": "<</PageSize[288 72]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x2/4.00x2.00": "<</PageSize[288 144]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x3/4.00x3.00": "<</PageSize[288 216]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x4/4.00x4.00": "<</PageSize[288 288]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x5/4.00x5.00": "<</PageSize[288 360]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x6/4.00x6.00": "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x7/4.00x7.00": "<</PageSize[288 504]/ImagingBBox null>>setpagedevice"
+*PageSize in.4x8/4.00x8.00": "<</PageSize[288 576]/ImagingBBox null>>setpagedevice"
+*PageSize in.6x4/6.00x4.00": "<</PageSize[432 288]/ImagingBBox null>>setpagedevice"
+*PageSize in.6x6/6.00x6.00": "<</PageSize[432 432]/ImagingBBox null>>setpagedevice"
+*PageSize in.6x8/6.00x8.00": "<</PageSize[432 576]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+*OpenUI *PageRegion/Media Size: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: in.4x6
+*PageRegion in.1x1/1.00x1.00": "<</PageSize[72 72]/ImagingBBox null>>setpagedevice"
+*PageRegion in.2x1/2.00x1.00": "<</PageSize[144 72]/ImagingBBox null>>setpagedevice"
+*PageRegion in.2x2/2.00x2.00": "<</PageSize[144 144]/ImagingBBox null>>setpagedevice"
+*PageRegion in.2x3/2.00x3.00": "<</PageSize[144 216]/ImagingBBox null>>setpagedevice"
+*PageRegion in.2x4/2.00x4.00": "<</PageSize[144 288]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x1/4.00x1.00": "<</PageSize[288 72]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x2/4.00x2.00": "<</PageSize[288 144]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x3/4.00x3.00": "<</PageSize[288 216]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x4/4.00x4.00": "<</PageSize[288 288]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x5/4.00x5.00": "<</PageSize[288 360]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x6/4.00x6.00": "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x7/4.00x7.00": "<</PageSize[288 504]/ImagingBBox null>>setpagedevice"
+*PageRegion in.4x8/4.00x8.00": "<</PageSize[288 576]/ImagingBBox null>>setpagedevice"
+*PageRegion in.6x4/6.00x4.00": "<</PageSize[432 288]/ImagingBBox null>>setpagedevice"
+*PageRegion in.6x6/6.00x6.00": "<</PageSize[432 432]/ImagingBBox null>>setpagedevice"
+*PageRegion in.6x8/6.00x8.00": "<</PageSize[432 576]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageRegion
+*DefaultImageableArea: in.4x6
+*ImageableArea in.1x1/1.00x1.00": "0 0 72 72"
+*ImageableArea in.2x1/2.00x1.00": "0 0 144 72"
+*ImageableArea in.2x2/2.00x2.00": "0 0 144 144"
+*ImageableArea in.2x3/2.00x3.00": "0 0 144 216"
+*ImageableArea in.2x4/2.00x4.00": "0 0 144 288"
+*ImageableArea in.4x1/4.00x1.00": "0 0 288 72"
+*ImageableArea in.4x2/4.00x2.00": "0 0 288 144"
+*ImageableArea in.4x3/4.00x3.00": "0 0 288 216"
+*ImageableArea in.4x4/4.00x4.00": "0 0 288 288"
+*ImageableArea in.4x5/4.00x5.00": "0 0 288 360"
+*ImageableArea in.4x6/4.00x6.00": "0 0 288 432"
+*ImageableArea in.4x7/4.00x7.00": "0 0 288 504"
+*ImageableArea in.4x8/4.00x8.00": "0 0 288 576"
+*ImageableArea in.6x4/6.00x4.00": "0 0 432 288"
+*ImageableArea in.6x6/6.00x6.00": "0 0 432 432"
+*ImageableArea in.6x8/6.00x8.00": "0 0 432 576"
+*DefaultPaperDimension: in.4x6
+*PaperDimension in.1x1/1.00x1.00": "72 72"
+*PaperDimension in.2x1/2.00x1.00": "144 72"
+*PaperDimension in.2x2/2.00x2.00": "144 144"
+*PaperDimension in.2x3/2.00x3.00": "144 216"
+*PaperDimension in.2x4/2.00x4.00": "144 288"
+*PaperDimension in.4x1/4.00x1.00": "288 72"
+*PaperDimension in.4x2/4.00x2.00": "288 144"
+*PaperDimension in.4x3/4.00x3.00": "288 216"
+*PaperDimension in.4x4/4.00x4.00": "288 288"
+*PaperDimension in.4x5/4.00x5.00": "288 360"
+*PaperDimension in.4x6/4.00x6.00": "288 432"
+*PaperDimension in.4x7/4.00x7.00": "288 504"
+*PaperDimension in.4x8/4.00x8.00": "288 576"
+*PaperDimension in.6x4/6.00x4.00": "432 288"
+*PaperDimension in.6x6/6.00x6.00": "432 432"
+*PaperDimension in.6x8/6.00x8.00": "432 576"
+*MaxMediaWidth: "576"
+*MaxMediaHeight: "3600"
+*HWMargins: 0 0 0 0
+*CustomPageSize True: "pop pop pop <</PageSize[5 -2 roll]/ImagingBBox null>>setpagedevice"
+*ParamCustomPageSize Width: 1 points 36 576
+*ParamCustomPageSize Height: 2 points 36 3600
+*ParamCustomPageSize WidthOffset: 3 points 0 0
+*ParamCustomPageSize HeightOffset: 4 points 0 0
+*ParamCustomPageSize Orientation: 5 int 0 0
+*OpenUI *MediaType/Print Method: PickOne
+*OrderDependency: 20 AnySetup *MediaType
+*DefaultMediaType: Default
+*MediaType Default/Use Printer Setting: ""
+*MediaType Thermal/Ribbon (TTR): "<</MediaType(Thermal)>>setpagedevice"
+*MediaType Direct/No Ribbon (DT): "<</MediaType(Direct)>>setpagedevice"
+*CloseUI: *MediaType
+*OpenGroup: MediaSettings/Media Settings
+*OpenUI *inMediaType/Media Type: PickOne
+*OrderDependency: 20 AnySetup *inMediaType
+*DefaultinMediaType: Default
+*inMediaType Default/Use Printer Setting: "<</cupsString0(Default)>>setpagedevice"
+*inMediaType Gap/Media With Gaps: "<</cupsString0(Gap)>>setpagedevice"
+*inMediaType Mark/Black Mark: "<</cupsString0(Mark)>>setpagedevice"
+*inMediaType ContVar/Continuous Variable Length: "<</cupsString0(ContVar)>>setpagedevice"
+*inMediaType ContFix/Continuous Fixed Length: "<</cupsString0(ContFix)>>setpagedevice"
+*CloseUI: *inMediaType
+*CloseGroup: MediaSettings
+*OpenGroup: FeedAdjustment/Feed Adjustment
+*OpenUI *inStartAdjust/Start Adjustment: PickOne
+*OrderDependency: 20 AnySetup *inStartAdjust
+*DefaultinStartAdjust: -1000
+*inStartAdjust -1000/Use Printer Setting: "<</cupsRowStep -1000>>setpagedevice"
+*inStartAdjust -120/-120 dots: "<</cupsRowStep -120>>setpagedevice"
+*inStartAdjust -100/-100 dots: "<</cupsRowStep -100>>setpagedevice"
+*inStartAdjust -80/-80 dots: "<</cupsRowStep -80>>setpagedevice"
+*inStartAdjust -60/-60 dots: "<</cupsRowStep -60>>setpagedevice"
+*inStartAdjust -40/-40 dots: "<</cupsRowStep -40>>setpagedevice"
+*inStartAdjust -20/-20 dots: "<</cupsRowStep -20>>setpagedevice"
+*inStartAdjust 0/0 dots: "<</cupsRowStep 0>>setpagedevice"
+*inStartAdjust 20/20 dots: "<</cupsRowStep 20>>setpagedevice"
+*inStartAdjust 40/40 dots: "<</cupsRowStep 40>>setpagedevice"
+*inStartAdjust 60/60 dots: "<</cupsRowStep 60>>setpagedevice"
+*inStartAdjust 80/80 dots: "<</cupsRowStep 80>>setpagedevice"
+*inStartAdjust 100/100 dots: "<</cupsRowStep 100>>setpagedevice"
+*inStartAdjust 120/120 dots: "<</cupsRowStep 120>>setpagedevice"
+*CloseUI: *inStartAdjust
+*OpenUI *inStopAdjust/Stop Adjustment: PickOne
+*OrderDependency: 20 AnySetup *inStopAdjust
+*DefaultinStopAdjust: -1000
+*inStopAdjust -1000/Use Printer Setting: "<</AdvanceDistance -1000>>setpagedevice"
+*inStopAdjust -120/-120 dots: "<</AdvanceDistance -120>>setpagedevice"
+*inStopAdjust -100/-100 dots: "<</AdvanceDistance -100>>setpagedevice"
+*inStopAdjust -80/-80 dots: "<</AdvanceDistance -80>>setpagedevice"
+*inStopAdjust -60/-60 dots: "<</AdvanceDistance -60>>setpagedevice"
+*inStopAdjust -40/-40 dots: "<</AdvanceDistance -40>>setpagedevice"
+*inStopAdjust -20/-20 dots: "<</AdvanceDistance -20>>setpagedevice"
+*inStopAdjust 0/0 dots: "<</AdvanceDistance 0>>setpagedevice"
+*inStopAdjust 20/20 dots: "<</AdvanceDistance 20>>setpagedevice"
+*inStopAdjust 40/40 dots: "<</AdvanceDistance 40>>setpagedevice"
+*inStopAdjust 60/60 dots: "<</AdvanceDistance 60>>setpagedevice"
+*inStopAdjust 80/80 dots: "<</AdvanceDistance 80>>setpagedevice"
+*inStopAdjust 100/100 dots: "<</AdvanceDistance 100>>setpagedevice"
+*inStopAdjust 120/120 dots: "<</AdvanceDistance 120>>setpagedevice"
+*CloseUI: *inStopAdjust
+*CloseGroup: FeedAdjustment
+*OpenGroup: PrintQuality/Print Quality
+*OpenUI *inResolution/TPH Resolution: PickOne
+*OrderDependency: 20 AnySetup *inResolution
+*DefaultinResolution: 203dpi
+*inResolution 203dpi/203 dpi: "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+*inResolution 300dpi/300 dpi: "<</HWResolution[300 300]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+*inResolution 406dpi/406 dpi: "<</HWResolution[406 406]/cupsBitsPerColor 1/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0/cupsColorSpace 3>>setpagedevice"
+*CloseUI: *inResolution
+*OpenUI *inPrintSpeed/Print Speed: PickOne
+*OrderDependency: 20 AnySetup *inPrintSpeed
+*DefaultinPrintSpeed: Default
+*inPrintSpeed Default/Use Printer Setting: ""
+*inPrintSpeed 2/2 (inches/sec) : "<</cupsString1(2)>>setpagedevice"
+*inPrintSpeed 3/3 (inches/sec): "<</cupsString1(3)>>setpagedevice"
+*inPrintSpeed 4/4 (inches/sec): "<</cupsString1(4)>>setpagedevice"
+*inPrintSpeed 5/5 (inches/sec): "<</cupsString1(5)>>setpagedevice"
+*inPrintSpeed 6/6 (inches/sec): "<</cupsString1(6)>>setpagedevice"
+*inPrintSpeed 7/7 (inches/sec): "<</cupsString1(7)>>setpagedevice"
+*inPrintSpeed 8/8 (inches/sec): "<</cupsString1(8)>>setpagedevice"
+*inPrintSpeed 9/9 (inches/sec): "<</cupsString1(9)>>setpagedevice"
+*inPrintSpeed 10/10 (inches/sec): "<</cupsString1(10)>>setpagedevice"
+*inPrintSpeed 11/11 (inches/sec): "<</cupsString1(11)>>setpagedevice"
+*inPrintSpeed 12/12 (inches/sec): "<</cupsString1(12)>>setpagedevice"
+*CloseUI: *inPrintSpeed
+*OpenUI *inDithering/Dithering Threshold: PickOne
+*OrderDependency: 20 AnySetup *inDithering
+*DefaultinDithering: 5
+*inDithering 1/0.1 (lighter): "<</cupsString2(1)>>setpagedevice"
+*inDithering 2/0.2: "<</cupsString2(2)>>setpagedevice"
+*inDithering 3/0.3: "<</cupsString2(3)>>setpagedevice"
+*inDithering 4/0.4: "<</cupsString2(4)>>setpagedevice"
+*inDithering 5/0.5: "<</cupsString2(5)>>setpagedevice"
+*inDithering 6/0.6: "<</cupsString2(6)>>setpagedevice"
+*inDithering 7/0.7: "<</cupsString2(7)>>setpagedevice"
+*inDithering 8/0.8: "<</cupsString2(8)>>setpagedevice"
+*inDithering 9/0.9 (darker): "<</cupsString2(9)>>setpagedevice"
+*CloseUI: *inDithering
+*OpenUI *inColormode/Color Mode: PickOne
+*OrderDependency: 20 AnySetup *inColormode
+*DefaultinColormode: bw
+*inColormode bw/Black/White: "<</cupsString4(8)>>setpagedevice"
+*inColormode gray/Gray: "<</cupsString4(9)>>setpagedevice"
+*CloseUI: *inColormode
+*OpenUI *inSensitivity/Media Sensitivity: PickOne
+*OrderDependency: 20 AnySetup *inSensitivity
+*DefaultinSensitivity: -1
+*inSensitivity -1/Use Printer Setting: ""
+*inSensitivity VeryLow/Very Low: "<</cupsString3(VeryLow)>>setpagedevice"
+*inSensitivity Low/Low: "<</cupsString3(Low)>>setpagedevice"
+*inSensitivity Medium/Medium: "<</cupsString3(Medium)>>setpagedevice"
+*inSensitivity High/High: "<</cupsString3(High)>>setpagedevice"
+*inSensitivity VeryHigh/Very High: "<</cupsString3(VeryHigh)>>setpagedevice"
+*CloseUI: *inSensitivity
+*OpenUI *inDarkness/Darkness: PickOne
+*OrderDependency: 20 AnySetup *inDarkness
+*DefaultinDarkness: -1
+*inDarkness -1/Use Printer Setting: "<</cupsCompression -1>>setpagedevice"
+*inDarkness 5/5: "<</cupsCompression 5>>setpagedevice"
+*inDarkness 15/15: "<</cupsCompression 15>>setpagedevice"
+*inDarkness 25/25: "<</cupsCompression 25>>setpagedevice"
+*inDarkness 35/35: "<</cupsCompression 35>>setpagedevice"
+*inDarkness 45/45: "<</cupsCompression 45>>setpagedevice"
+*inDarkness 55/55: "<</cupsCompression 55>>setpagedevice"
+*inDarkness 65/65: "<</cupsCompression 65>>setpagedevice"
+*inDarkness 75/75: "<</cupsCompression 75>>setpagedevice"
+*inDarkness 85/85: "<</cupsCompression 85>>setpagedevice"
+*inDarkness 95/95: "<</cupsCompression 95>>setpagedevice"
+*CloseUI: *inDarkness
+*CloseGroup: PrintQuality
+*DefaultFont: Courier
+*Font AvantGarde-Book: Standard "(001.006S)" Standard ROM
+*Font AvantGarde-BookOblique: Standard "(001.006S)" Standard ROM
+*Font AvantGarde-Demi: Standard "(001.007S)" Standard ROM
+*Font AvantGarde-DemiOblique: Standard "(001.007S)" Standard ROM
+*Font Bookman-Demi: Standard "(001.004S)" Standard ROM
+*Font Bookman-DemiItalic: Standard "(001.004S)" Standard ROM
+*Font Bookman-Light: Standard "(001.004S)" Standard ROM
+*Font Bookman-LightItalic: Standard "(001.004S)" Standard ROM
+*Font Courier: Standard "(002.004S)" Standard ROM
+*Font Courier-Bold: Standard "(002.004S)" Standard ROM
+*Font Courier-BoldOblique: Standard "(002.004S)" Standard ROM
+*Font Courier-Oblique: Standard "(002.004S)" Standard ROM
+*Font Helvetica: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Bold: Standard "(001.007S)" Standard ROM
+*Font Helvetica-BoldOblique: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Narrow-Bold: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow-BoldOblique: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow-Oblique: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Oblique: Standard "(001.006S)" Standard ROM
+*Font NewCenturySchlbk-Bold: Standard "(001.009S)" Standard ROM
+*Font NewCenturySchlbk-BoldItalic: Standard "(001.007S)" Standard ROM
+*Font NewCenturySchlbk-Italic: Standard "(001.006S)" Standard ROM
+*Font NewCenturySchlbk-Roman: Standard "(001.007S)" Standard ROM
+*Font Palatino-Bold: Standard "(001.005S)" Standard ROM
+*Font Palatino-BoldItalic: Standard "(001.005S)" Standard ROM
+*Font Palatino-Italic: Standard "(001.005S)" Standard ROM
+*Font Palatino-Roman: Standard "(001.005S)" Standard ROM
+*Font Symbol: Special "(001.007S)" Special ROM
+*Font Times-Bold: Standard "(001.007S)" Standard ROM
+*Font Times-BoldItalic: Standard "(001.009S)" Standard ROM
+*Font Times-Italic: Standard "(001.007S)" Standard ROM
+*Font Times-Roman: Standard "(001.007S)" Standard ROM
+*Font ZapfChancery-MediumItalic: Standard "(001.007S)" Standard ROM
+*Font ZapfDingbats: Special "(001.004S)" Standard ROM
+*% End of intermec-dp-pm4i-300.ppd, 15294 bytes.

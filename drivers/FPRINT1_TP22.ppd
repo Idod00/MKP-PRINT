@@ -1,0 +1,50 @@
+*PPD-Adobe: "4.3"
+*FormatVersion: "4.3"
+*FileVersion: "1.0"
+*LanguageVersion: "Spanish"
+*LanguageEncoding: ISOLatin1
+*PCFileName: "FPRINT1.PPD"
+*Manufacturer: "UNNION"
+*Product: "(TP22)"
+*ModelName: "UNNION TP22"
+*NickName: "UNNION TP22 ESC/POS (MKP)"
+*ShortNickName: "TP22"
+*cupsVersion: 2.4
+*cupsModelNumber: 1
+*cupsManualCopies: False
+*cupsFilter: "application/pdf 0 pdftoescpos-mkp"
+
+*OpenUI *PageSize/Page Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: Custom.72x200mm
+*PageSize Custom.72x200mm: "<</PageSize[204.72 566.93] /ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+
+*DefaultImageableArea: Custom.72x200mm
+*ImageableArea Custom.72x200mm: "0 0 204.72 566.93"
+
+*DefaultPaperDimension: Custom.72x200mm
+*PaperDimension Custom.72x200mm: "204.72 566.93"
+
+*DefaultResolution: 203dpi
+*OpenUI *Resolution/Resolución: PickOne
+*OrderDependency: 20 AnySetup *Resolution
+*Resolution 203dpi/203 DPI: "<</HWResolution[203 203]>>setpagedevice"
+*CloseUI: *Resolution
+
+*OpenUI *CutType/Tipo de corte: PickOne
+*OrderDependency: 30 AnySetup *CutType
+*DefaultCutType: Partial
+*CutType Partial/Corte parcial: ""
+*CutType Full/Corte completo: ""
+*CloseUI: *CutType
+
+*DefaultDensity: Medium
+*OpenUI *Density/Densidad: PickOne
+*OrderDependency: 40 AnySetup *Density
+*Density Light/Suave: ""
+*Density Medium/Media: ""
+*Density Dark/Oscura: ""
+*CloseUI: *Density
+
+*% Cualquier otra opción se maneja en el filtro pdftoescpos-mkp

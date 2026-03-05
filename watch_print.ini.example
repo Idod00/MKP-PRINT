@@ -1,0 +1,50 @@
+[General]
+# Cronograma resumido:
+# 2025-11-11 -> versión inicial portando el servicio desde PowerShell.
+# 2025-11-12 -> adopción de colas MKP1/MKP2/MKP3 y documentación en README.
+# 2025-11-12 pm -> endurecimiento de acceso web (cupsadmin dentro de lpadmin).
+# Rutas montadas que se desean vigilar (separadas por coma o saltos de línea)
+WatchPaths = /mnt/mkp_print, /mnt/f_print
+# WatchPath = /mnt/mkp_print  # Compatibilidad si solo necesitas una carpeta
+
+# Subcarpetas relativas a cada WatchPath para archivar resultados
+PrintedFolderName = Printed
+ErrorFolderName = Error
+
+# Directorio local donde se guardarán los logs rotados por día
+LogBaseDir = logs/listener
+
+# Usa PollingObserver cuando las carpetas vigiladas son montajes SMB/CIFS
+UsePollingObserver = true
+
+# Plantilla del comando de impresión. {file} y {printer} se reemplazan dinámicamente.
+# Ejemplo con CUPS: lp -d "IMPRESORA1" "/ruta/al/archivo.pdf"
+# Ejemplo con ajustes por trabajo para etiquetas 90x70mm horizontales:
+PrinterCommandTemplate = lp -d "{printer}" -o media=Custom.90x70mm -o PageSize=Custom.90x70mm -o orientation-requested=4 -o landscape -o print-scaling=fill -o fit-to-page "{file}"
+
+# Tiempo máximo (segundos) para que el comando de impresión finalice
+PrintTimeoutSeconds = 8
+
+# Cantidad de reintentos para esperar que un archivo deje de estar bloqueado
+FileReadyRetries = 10
+FileReadyDelayMs = 200
+
+# Tiempo de espera tras recibir un evento antes de procesarlo (milisegundos)
+EventDebounceMs = 300
+
+[Printers]
+# Puedes mapear prefijos de archivo (antes del "_") a colas reales de CUPS.
+# En este ejemplo cada prefijo apunta a una cola física MKP{1..3} creada en CUPS
+# (todas compartiendo el mismo driver Honeywell).
+# Sintaxis: PREFIJO_ARCHIVO = COLA_REAL_CUPS
+#  - PREFIJO_ARCHIVO: coincide con la porción antes del "_" en el nombre del PDF (ej: FPRINT1_ticket.pdf)
+#  - COLA_REAL_CUPS: nombre exacto de la cola en CUPS donde se imprimirá.
+MKP1 = MKP1
+MKP2 = MKP2
+MKP3 = MKP3
+# Ticketera genérica/contingencia
+FPRINT1 = FPRINT1
+
+[PrinterCommands]
+# Usa un comando distinto para la ticketera (ancho 80x3276mm y sin márgenes).
+FPRINT1 = lp -d "{printer}" -o media=Custom.80x3276mm -o page-top=0 -o page-bottom=0 -o fit-to-page=true -o print-scaling=100 "{file}"

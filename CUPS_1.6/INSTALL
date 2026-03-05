@@ -1,0 +1,101 @@
+------------------------------------------------------------
+INSTALL   -   Installation instructions
+------------------------------------------------------------
+
+Content:
+
+1. Prerequisites
+
+2. Operating Systems Validated
+
+3. Automated Installation
+
+4. Manual Installation
+
+
+------------------------------------------------------------
+1. Prerequisites
+------------------------------------------------------------
+
+a. GNU Toolchain:
+   automake, autoconf, GCC, make, glibc headers, etc.
+
+b. NETPBM Utilities:
+   pdftoppm, pgmtopbm, pnmtoplainpnm, etc.
+
+c. Ghostscript
+   ghostscript, poppler-utils, etc.
+
+d. CUPS
+   cupsd, cups, etc.
+
+
+Example Ubuntu Prerequisites installation
+-----------------------------------------
+sudo apt-get install cups
+sudo apt-get install automake
+sudo apt-get install autoconf
+sudo apt-get install gcc
+sudo apt-get install ghostscript 
+sudo apt-get install poppler-utils
+sudo apt-get install netpbm
+
+Example Red Hat/CentOS Prerequisites installation
+-------------------------------------------------
+sudo yum install cups
+sudo yum install automake
+sudo yum install autoconf
+sudo yum install gcc
+sudo yum install ghostscript 
+sudo yum install poppler-utils
+sudo yum install netpbm
+sudo yum install netpbm-progs
+sudo yum install glibc-devel 
+
+Additional for 64 bit Red Hat/CentOS
+-------------------------------------------------
+sudo yum install glibc-devel.i686
+
+
+------------------------------------------------------------
+2. Operating Systems Validated
+------------------------------------------------------------
+
+The following operating systems have been validated so far:
+
+a. Ubuntu 10.04 LTS (32 bit)
+
+b. Red Hat Enterprise Linux (RHEL) 5.0 (32 bit)
+
+c. CentOS 6.2 (64 bit)
+
+d. openSUSE 12.1 (64 bit)
+
+
+------------------------------------------------------------
+3. Automated Installation
+------------------------------------------------------------
+
+a. Run the following command (requires sudo):
+
+   ./build.sh
+
+
+------------------------------------------------------------
+4. Manual Installation
+------------------------------------------------------------
+
+a. Run the following commands to configure 
+   and build the package:
+
+   autoreconf --install --force
+
+   ./configure
+
+   make -s
+
+
+b. Run the following command to install the
+   package to the system:
+
+   sudo make install
